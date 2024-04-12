@@ -7,115 +7,101 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function EditCar(props){
+export default function EditCar(props) {
 
 
     const [car, setCar] = React.useState({
         brand: '',
-         model: '',
-         color: '',
-         fuel: '',
-         year: '',
-         price: ''
-        })
-//open false kun ikkuna kiinni
-   const [open, setOpen] = React.useState(false);
-   const handleClickOpen = () => {
-       setOpen(true);
-       setCar({
-        brand: props.params.data.brand,
-        model: props.params.data.model
-       });
-   }
+        model: '',
+        color: '',
+        fuel: '',
+        modelYear: '',
+        price: ''
+    })
 
-   const handleSave = () => {
-       console.log("EditCar: update info car");
-       const url = props.params.data._links.car.href;
-       props.updateCar(url, car);
-       setOpen(false);
-       
-   }
+    // open = false, kun ikkuna on kiinni
+    const [open, setOpen] = React.useState(false);
 
-   
-       const handleCancel = () =>  setOpen(false);
-       
-   
-   
+    const handleClickOpen = () => {
+        setOpen(true)
+        setCar({
 
 
+            brand: props.params.data.brand,
+            model: props.params.data.model,
+            color: props.params.data.color,
+            fuel: props.params.data.fuel,
+            modelYear: props.params.data.modelYear,
+            price: props.params.data.price
+        });
+    }
 
-   return (
+    const handleSave = () => {
+        console.log("edit: succesful");
+        props.updateCar(props.params.data._links.car.href, car);
+        setOpen(false)
+    }
 
-       
-       <div>
-          
-        <Button onClick={handleClickOpen}>Edit</Button>
-       
-       <Dialog open={open}>
-           
-           <DialogTitle> Edit car
+    const handleCancel = () => {
+        setOpen(false)
+    }
+return (
+        <>
+            <Button onClick={handleClickOpen}>Edit</Button>
+            <Dialog open={open}>
+                <DialogTitle>
+                    Edit the car
+                </DialogTitle>
+                <DialogContent>
+                    <TextField
+                        margin='dense'
+                        label="Brand"
+                        value={car.brand}
+                        onChange={(e) => setCar({ ...car, brand: e.target.value })}
+                        variant="standard">
+                    </TextField>
+                    <TextField
+                        margin="dense"
+                        label="Model"
+                        value={car.model}
+                        onChange={(e) => setCar({ ...car, model: e.target.value })}
+                        variant="standard">
+                    </TextField>
+                    <TextField
+                        margin="dense"
+                        label="color"
+                        value={car.color}
+                        onChange={(e) => setCar({ ...car, color: e.target.value })}
+                        variant="standard">
+                    </TextField>
+                    <TextField
+                        margin="dense"
+                        label="fuel"
+                        value={car.fuel}
+                        onChange={(e) => setCar({ ...car, fuel: e.target.value })}
+                        variant="standard">
+                    </TextField>
+<TextField
+                        margin="dense"
+                        label="year"
+                        value={car.modelYear}
+                        onChange={(e) => setCar({ ...car, modelYear: e.target.value })}
+                        variant="standard">
+                    </TextField>
+                    <TextField
+                        margin="dense"
+                        label="price"
+                        value={car.price}
+                        onChange={(e) => setCar({ ...car, price: e.target.value })}
+                        variant="standard">
+                    </TextField>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleSave}>Save edited</Button>
+                    <Button onClick={handleCancel}>Cancel</Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    )
 
-           </DialogTitle>
-           <DialogContent>
-               <TextField
-                   margin="dense"
-                   label="Brand"
-                   value={car.brand}
-                   onChange={ (e) => setCar({...car, brand: e.target.value})}
-                   variant="standard"
-                   fullwidth>
-               </TextField>
-
-               <TextField
-                   margin="dense"
-                   label="Model"
-                   value={car.model}
-                   onChange={ (e) => setCar({...car, model: e.target.value})}
-                   variant="standard">
-               </TextField>
-
-               <TextField
-                   margin="dense"
-                   label="color"
-                   value={car.color}
-                   onChange={ (e) => setCar({...car, color: e.target.value})}
-                   variant="standard">
-               </TextField>
-
-               <TextField
-                   margin="dense"
-                   label="fuel"
-                   value={car.fuel}
-                   onChange={ (e) => setCar({...car, fuel: e.target.value})}
-                   variant="standard">
-               </TextField>
-
-               <TextField
-                   margin="dense"
-                   label="year"
-                   value={car.year}
-                   onChange={ (e) => setCar({...car, year: e.target.value})}
-                   variant="standard">
-               </TextField>
-
-               <TextField
-                   margin="dense"
-                   label="price"
-                   value={car.price}
-                   onChange={ (e) => setCar({...car, price: e.target.value})}
-                   variant="standard">
-               </TextField>
-
-
-
-
-
-           </DialogContent>
-           <DialogActions>
-               <Button onClick={handleSave}>Save</Button>
-               <Button onClick={handleCancel}>Cancel</Button>
-           </DialogActions>
-       </Dialog>
-       </div>
-   )
 }

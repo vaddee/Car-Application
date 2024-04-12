@@ -8,108 +8,90 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function AddCar(props){
+export default function AddCar(props) {
 
     const [car, setCar] = React.useState({
-         brand: '',
-          model: '',
-          color: '',
-          fuel: '',
-          year: '',
-          price: ''
-         })
-//open false kun ikkuna kiinni
+        brand: '',
+        model: '',
+        color: '',
+        fuel: '',
+        modelYear: '',
+        price: ''
+    })
+
+    // open = false, kun ikkuna on kiinni
     const [open, setOpen] = React.useState(false);
+
     const handleClickOpen = () => {
-        setOpen(true);
+        setOpen(true)
     }
 
     const handleSave = () => {
-        console.log("AddCar: save a new car");
-        props.AddCar(car);
-        setOpen(false);
+        console.log("addcar: save a new car" ); 
+        props.addCar(car);
+        setOpen(false)
     }
 
-    
-        const handleCancel = () =>  setOpen(false);
-        
-    
-    
+    const handleCancel = () => {
+        setOpen(false)
+    }
+return (
+        <>
+            <Button onClick={handleClickOpen}>Add car</Button>
 
-
-
-    return (
-
-        
-        <div>
-           <Button onClick={handleClickOpen}>Add </Button>
-
-        
-        <Dialog open={open}>
-            
-            <DialogTitle> Add car
-
-            </DialogTitle>
-            <DialogContent>
-                <TextField
-                    margin="dense"
-                    label="Brand"
-                    value={car.brand}
-                    onChange={ (e) => setCar({...car, brand: e.target.value})}
-                    variant="standard"
-                    fullwidth>
-                </TextField>
-
-                <TextField
-                    margin="dense"
-                    label="Model"
-                    value={car.model}
-                    onChange={ (e) => setCar({...car, model: e.target.value})}
-                    variant="standard">
-                </TextField>
-
-                <TextField
-                    margin="dense"
-                    label="color"
-                    value={car.color}
-                    onChange={ (e) => setCar({...car, color: e.target.value})}
-                    variant="standard">
-                </TextField>
-
-                <TextField
-                    margin="dense"
-                    label="fuel"
-                    value={car.fuel}
-                    onChange={ (e) => setCar({...car, fuel: e.target.value})}
-                    variant="standard">
-                </TextField>
-
-                <TextField
-                    margin="dense"
-                    label="year"
-                    value={car.year}
-                    onChange={ (e) => setCar({...car, year: e.target.value})}
-                    variant="standard">
-                </TextField>
-
-                <TextField
-                    margin="dense"
-                    label="price"
-                    value={car.price}
-                    onChange={ (e) => setCar({...car, price: e.target.value})}
-                    variant="standard">
-                </TextField>
-
-
-
-
-
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleSave}>Save</Button>
-                <Button onClick={handleCancel}>Cancel</Button>
-            </DialogActions>
-        </Dialog>
-        </div>
+            <Dialog open={open}>
+                <DialogTitle>
+                    Add car
+                </DialogTitle>
+                <DialogContent>
+                    <TextField
+                        margin='dense'
+                        label="Brand"
+                        value={car.brand}
+                        onChange={ (e) => setCar({...car, brand: e.target.value})}
+                        variant="standard">
+                    </TextField>
+                    <TextField
+                        margin="dense"
+                        label="Model"
+                        value={car.model}
+                        onChange={ (e) => setCar({...car, model: e.target.value})}
+                        variant="standard">
+                    </TextField>
+                    <TextField
+                        margin="dense"
+                        label="color"
+                        value={car.color}
+                        onChange={ (e) => setCar({...car, color: e.target.value})}
+                        variant="standard">
+                    </TextField>
+                    <TextField
+                        margin="dense"
+                        label="fuel"
+                        value={car.fuel}
+                        onChange={ (e) => setCar({...car, fuel: e.target.value})}
+                        variant="standard">
+                    </TextField>
+<TextField
+                        margin="dense"
+                        label="year"
+                        value={car.modelYear}
+                        onChange={ (e) => setCar({...car, modelYear: e.target.value})}
+                        variant="standard">
+                    </TextField>
+                    <TextField
+                        margin="dense"
+                        label="price"
+                        value={car.price}
+                        onChange={ (e) => setCar({...car, price: e.target.value})}
+                        variant="standard">
+                    </TextField>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleSave}>Save</Button>
+                    <Button onClick={handleCancel}>Cancel</Button> 
+                </DialogActions>
+            </Dialog>
+        </>
     )
 }
